@@ -39,8 +39,7 @@ def can_get_the_last_item_in_the_database
 end
 
 def can_get_size_of_the_database
-  # Movie.all.size
-  Movie.count
+  Movie.all.size
 end
 
 def can_find_the_first_item_from_the_database_using_id
@@ -57,7 +56,8 @@ end
 def can_find_using_where_clause_and_be_sorted
   # For this test return all movies released after 2002 and ordered by
   # release date descending
-  Movie.where("release_date > 2002").order('release_date DESC')
+  # Movie.where("release_date > 2002").order('release_date DESC')
+  Movie.where("release_date > 2002").order(release_date: :desc)
 end
 
 def can_be_found_updated_and_saved
@@ -80,7 +80,9 @@ def can_update_multiple_items_at_once
   5.times do |i|
     Movie.create(title: "Movie_#{i}", release_date: 2000+i)
   end
-  Movie.all.each {|movie| movie.update(title: "A Movie")}
+  
+  # Movie.all.each {|movie| movie.update(title: "A Movie")}
+  Movie.update_all(title: "A Movie")
 end
 
 def can_destroy_a_single_item
